@@ -1,0 +1,5 @@
+# exclude everything in dotvim (autoload, backup, undo, etc.)
+# but keep submodules
+vim/dotvim/*
+!vim/dotvim/colorschemes
+!vim/dotvim/plugins

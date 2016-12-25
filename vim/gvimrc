@@ -1,0 +1,23 @@
+set t_vb= " turn off bell
+
+set guifont=Hack:h10,Consolas
+
+if strftime("%H") >= 5 && strftime("%H") < 18
+    set background=light
+else
+    " color gruvbox
+    set background=dark
+endif
+color solarized
+
+" highlight when over 80 columns
+highlight OverLength ctermbg=red ctermfg=white guibg=#592929
+match OverLength /\%81v.\+/
+
+set guioptions+=c " use console dialogs
+set guioptions-=e " no gui tabs - use tabline
+set guioptions-=T " no toolbar
+set guioptions-=L " no left scrollbar
+set guioptions-=r " no right scrollbar
+set guioptions-=m " no menu
+set guioptions-=t " no tearoff menu

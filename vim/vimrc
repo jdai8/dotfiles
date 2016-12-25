@@ -1,0 +1,117 @@
+let mapleader = "\<Space>"
+
+" dotvim is ~/.vim on unix, ~/vimfiles on windows or cygwin
+let dotvim = "~/.vim"
+if has("win32") || has("win32unix")
+    let dotvim = expand("~/vimfiles")
+endif
+
+" plugins and colorschemes
+execute pathogen#infect(dotvim . '/plugins/{}', dotvim . '/colorschemes/{}')
+
+nnoremap <leader>f :CtrlPMRUFiles<CR>
+let g:ctrlp_by_filename = 1
+
+" for jsx plugin
+let g:jsx_ext_required = 0
+
+" END PLUGINS
+
+" highlight when over 80 columns
+" http://stackoverflow.com/questions/235439/vim-80-column-layout-concerns
+highlight OverLength ctermbg=red ctermfg=white guibg=#592929
+match OverLength /\%81v.\+/
+
+filetype plugin indent on
+
+" don't auto-add a comment when I press o or O
+autocmd FileType * setlocal formatoptions-=o
+
+set ff=unix
+
+set scrolloff=3
+
+inoremap <C-BS> 
+inoremap  <nop>
+
+nnoremap q: <nop>
+
+cnoreabbrev H vert h
+
+" Leader mappings"
+
+nnoremap <leader>p "+p
+nnoremap <leader>P "+P
+nnoremap <leader>y "+y
+nnoremap <leader>Y "+Y
+vnoremap <leader>p "+p
+vnoremap <leader>P "+P
+vnoremap <leader>y "+y
+vnoremap <leader>Y "+Y
+
+nnoremap <leader>w :w<CR>
+nnoremap <leader>q :q<CR>
+
+nnoremap <leader>h h
+nnoremap <leader>j j
+nnoremap <leader>k k
+nnoremap <leader>l l
+
+nnoremap <leader>o o<Esc>k
+nnoremap <leader>i O<Esc>j
+
+nnoremap <expr> k (v:count > 5 ? "m'" . v:count : '') . 'k'
+nnoremap <expr> j (v:count > 5 ? "m'" . v:count : '') . 'j'
+
+function! CleanUpWhitespace()
+    normal mz
+    :%s/\s\+$//e
+    :%s/\n\{3,}/\r\r/e
+    normal `z
+endfunction
+
+set undofile
+let &undodir = dotvim . "/undo"
+let &backupdir = dotvim . "/backup"
+
+" tab settings
+set expandtab     " converts tabs to spaces
+set softtabstop=4 " press tab key = insert 4 cols
+set tabstop=4     " display a \t as 4 spaces
+set shiftwidth=4  " what to use for << and >>, and autoindent
+set shiftround
+
+autocmd FileType javascript set shiftwidth=2 tabstop=2 softtabstop=2
+autocmd FileType html       set shiftwidth=2 tabstop=2 softtabstop=2
+autocmd FileType css        set shiftwidth=2 tabstop=2 softtabstop=2
+autocmd FileType elm        set shiftwidth=2 tabstop=2 softtabstop=2
+
+set mouse = ""
+
+noremap Y y$
+
+" don't need this because of vim-cool
+" noremap <silent> <esc> :noh<return><esc>
+
+syntax enable
+
+augroup CursorLine
+    au!
+    au VimEnter,WinEnter,BufWinEnter * setlocal cursorline
+    au WinLeave * setlocal nocursorline
+augroup END
+
+set autoindent
+set laststatus=2
+set confirm
+set number
+set relativenumber
+set wildmenu
+set wildmode=longest,full
+set ignorecase
+set smartcase
+set visualbell
+set backspace=indent,eol,start
+set incsearch
+set hlsearch
+set autoread

@@ -1,0 +1,9 @@
+[core]
+	excludesfile = ~/.gitignore_global
+	autocrlf = true
+	safecrlf = false
+[user]
+	name = Jack Dai
+	email = jdai88@gmail.com
+[alias]
+	st = status
