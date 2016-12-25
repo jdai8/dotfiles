@@ -10,9 +10,12 @@ mkdir dotvim\undo
 copy pathogen\autoload\pathogen.vim dotvim\autoload
 cd ..\..
 
-del _vimrc _gvimrc vimfiles .vim
 mklink _vimrc dotfiles\vim\vimrc
 mklink _gvimrc dotfiles\vim\gvimrc
 mklink vimfiles dotfiles\vim\dotvim
 rem cygwin looks in ~/vim
 mklink .vim dotfiles\vim\dotvim
+
+rem Git setup
+mklink .gitconfig dotfiles\git\gitconfig
+mklink .gitignore_global dotfiles\git\gitignore_global
