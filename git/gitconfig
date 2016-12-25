@@ -7,3 +7,5 @@
 	email = jdai88@gmail.com
 [alias]
 	st = status
+[push]
+    default = simple
