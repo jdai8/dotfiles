@@ -123,3 +123,5 @@ set backspace=indent,eol,start
 set incsearch
 set hlsearch
 set autoread
+set showcmd
+set noruler
