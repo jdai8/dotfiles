@@ -1,13 +1,21 @@
 let mapleader = "\<Space>"
 
 " dotvim is ~/.vim on unix, ~/vimfiles on windows or cygwin
-let dotvim = "~/.vim"
+let dotvim = expand("~/.vim")
 if has("win32") || has("win32unix")
     let dotvim = expand("~/vimfiles")
 endif
 
 " plugins and colorschemes
 execute pathogen#infect(dotvim . '/plugins/{}', dotvim . '/colorschemes/{}')
+
+if strftime("%H") >= 5 && strftime("%H") < 18
+    set background=light
+else
+    " color gruvbox
+    set background=dark
+endif
+color solarized
 
 nnoremap <leader>f :CtrlPMRUFiles<CR>
 let g:ctrlp_by_filename = 1
