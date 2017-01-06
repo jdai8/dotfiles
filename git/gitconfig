@@ -1,6 +1,6 @@
 [core]
 	excludesfile = ~/.gitignore_global
-	autocrlf = true
+	autocrlf = false
 	safecrlf = false
 [user]
 	name = Jack Dai
