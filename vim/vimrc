@@ -9,62 +9,65 @@ endif
 " plugins and colorschemes
 execute pathogen#infect(dotvim . '/plugins/{}', dotvim . '/colorschemes/{}')
 
-if strftime("%H") >= 5 && strftime("%H") < 18
-    set background=light
-else
-    " color gruvbox
-    set background=dark
-endif
+syntax enable
+let &bg = (strftime("%H") >= 5 && strftime("%H") < 18) ? "light" : "dark"
 color solarized
 
-nnoremap <leader>f :CtrlPMRUFiles<CR>
-let g:ctrlp_by_filename = 1
+" search through oldfiles, taken from https://github.com/romainl/vim-tinyMRU/
+function! OldfilesComplete(substr, cmdLine, cursor)
+    " throw away files I never saved
+    let files = filter(copy(v:oldfiles), 'filereadable(expand(v:val))')
+    return map(filter(files, 'v:val =~ a:substr'), 'fnamemodify(v:val, ":.")')
+endfunction
 
-" for jsx plugin
-let g:jsx_ext_required = 0
+function! OpenOldFile(file)
+    let match = a:file
+    if !filereadable(a:file)
+        let matches = OldfilesComplete(a:file, 0, 0)
+        if empty(matches)
+            echo "no matches"
+            return
+        endif
+        let match = matches[0]
+    endif
 
-" END PLUGINS
+    execute "edit " . match
+endfunction
+
+command! -nargs=1 -complete=customlist,OldfilesComplete Old
+            \ call OpenOldFile(fnameescape(<f-args>))
+
+execute 'nnoremap <leader>f :Old '
 
 " highlight when over 80 columns
-" http://stackoverflow.com/questions/235439/vim-80-column-layout-concerns
-highlight OverLength ctermbg=red ctermfg=white guibg=#592929
-match OverLength /\%81v.\+/
+match ErrorMsg /\%81v.\+/
 
 filetype plugin indent on
 
 " don't auto-add a comment when I press o or O
 autocmd FileType * setlocal formatoptions-=o
 
-set ff=unix
-
-set scrolloff=3
-
-inoremap <C-BS> 
+" may have to adjust this (map ctrl-backspace to delete words)
+inoremap  
 inoremap  <nop>
-
-nnoremap q: <nop>
 
 cnoreabbrev H vert h
 
-" Leader mappings"
+" Leader mappings
+for c in ["p", "P", "y", "Y"]
+    execute 'nnoremap <leader>' . c . ' "+' . c
+    execute 'vnoremap <leader>' . c . ' "+' . c
+endfor
 
-nnoremap <leader>p "+p
-nnoremap <leader>P "+P
-nnoremap <leader>y "+y
-nnoremap <leader>Y "+Y
-vnoremap <leader>p "+p
-vnoremap <leader>P "+P
-vnoremap <leader>y "+y
-vnoremap <leader>Y "+Y
+for d in ["h", "j", "k", "l"]
+    execute 'nnoremap <leader>' . d . ' <C-w>' . d
+endfor
 
 nnoremap <leader>w :w<CR>
 nnoremap <leader>q :q<CR>
+nnoremap q: :q<CR>
 
-nnoremap <leader>h h
-nnoremap <leader>j j
-nnoremap <leader>k k
-nnoremap <leader>l l
-
+" used for spacing with blank lines
 nnoremap <leader>o o<Esc>k
 nnoremap <leader>i O<Esc>j
 
@@ -87,7 +90,7 @@ set expandtab     " converts tabs to spaces
 set softtabstop=4 " press tab key = insert 4 cols
 set tabstop=4     " display a \t as 4 spaces
 set shiftwidth=4  " what to use for << and >>, and autoindent
-set shiftround
+set shiftround    " rounds << and >>
 
 autocmd FileType javascript set shiftwidth=2 tabstop=2 softtabstop=2
 autocmd FileType html       set shiftwidth=2 tabstop=2 softtabstop=2
@@ -98,10 +101,7 @@ set mouse = ""
 
 noremap Y y$
 
-" don't need this because of vim-cool
-" noremap <silent> <esc> :noh<return><esc>
-
-syntax enable
+noremap <silent> <esc> :noh<return><esc>
 
 augroup CursorLine
     au!
@@ -109,6 +109,11 @@ augroup CursorLine
     au WinLeave * setlocal nocursorline
 augroup END
 
+set timeoutlen=500 " wait half a second for mappings
+set ttimeoutlen=0  " dont wait on key codes
+
+set ff=unix
+set scrolloff=3
 set autoindent
 set laststatus=2
 set confirm

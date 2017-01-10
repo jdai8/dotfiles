@@ -4,18 +4,12 @@
 [submodule "vim/dotvim/colorschemes/solarized"]
 	path = vim/dotvim/colorschemes/solarized
 	url = https://github.com/altercation/vim-colors-solarized.git
-[submodule "vim/dotvim/plugins/ctrlp"]
-	path = vim/dotvim/plugins/ctrlp
-	url = https://github.com/ctrlpvim/ctrlp.vim
 [submodule "vim/dotvim/plugins/targets"]
 	path = vim/dotvim/plugins/targets
 	url = https://github.com/wellle/targets.vim.git
 [submodule "vim/dotvim/plugins/commentary"]
 	path = vim/dotvim/plugins/commentary
 	url = https://github.com/tpope/vim-commentary.git
-[submodule "vim/dotvim/plugins/cool"]
-	path = vim/dotvim/plugins/cool
-	url = https://github.com/romainl/vim-cool.git
 [submodule "vim/dotvim/plugins/lion"]
 	path = vim/dotvim/plugins/lion
 	url = https://github.com/tommcdo/vim-lion.git
