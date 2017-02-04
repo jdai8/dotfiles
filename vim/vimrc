@@ -41,17 +41,16 @@ nnoremap <leader>f :Old<space>
 
 " highlight when over 80 columns
 function! ToggleLongLines()
+    let g:longlines = !g:longlines
     if g:longlines
-        highlight link OverLength NONE
-    else
         highlight link OverLength ErrorMsg
         match OverLength /\%81v.\+/
+    else
+        highlight link OverLength NONE
     endif
-    let g:longlines = !g:longlines
 endfunction
 command! ToggleLongLines call ToggleLongLines()
-let g:longlines = v:false
-call ToggleLongLines()
+let g:longlines = 0
 
 filetype plugin indent on
 
