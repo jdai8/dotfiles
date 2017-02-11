@@ -10,10 +10,6 @@ else
 endif
 color solarized
 
-" highlight when over 80 columns
-highlight OverLength ctermbg=red ctermfg=white guibg=#592929
-match OverLength /\%81v.\+/
-
 set guioptions+=c " use console dialogs
 set guioptions-=e " no gui tabs - use tabline
 set guioptions-=T " no toolbar
