@@ -64,6 +64,7 @@ inoremap  <nop>
 cnoreabbrev H vert h
 
 " Leader mappings
+nnoremap <leader><tab> 
 nnoremap <leader>e :ls<CR>:b<space>
 
 for c in ["p", "P", "y", "Y"]
