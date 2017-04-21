@@ -95,6 +95,9 @@ function! CleanUpWhitespace()
 endfunction
 command! CleanUpWhitespace call CleanUpWhitespace()
 
+" don't make .netrwhist files
+let g:netrw_dirhistmax = 0
+
 set undofile
 let &undodir = dotvim . "/undo"
 let &backupdir = dotvim . "/backup"
