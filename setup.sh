@@ -13,4 +13,7 @@ ln -s dotfiles/vim/dotvim .vim
 ln -s dotfiles/git/gitconfig .gitconfig
 ln -s dotfiles/git/gitignore_global .gitignore_global
 
-ln -s dotfiles/terminfo .terminfo
+ln -sT dotfiles/terminfo .terminfo
+
+ln -s dotfiles/shell/zshrc .zshrc
+ln -s dotfiles/shell/aliases .aliases

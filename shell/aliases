@@ -1,0 +1,8 @@
+alias v='vim'
+alias z='zathura-wrapper.sh'
+alias ls='ls --color=auto'
+alias l='ls --color=auto'
+alias ll='ls -la --color=auto --human-readable'
+alias grep='grep -i'
+alias cal='cal -n 3'
+alias a='source activate.sh'
