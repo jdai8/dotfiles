@@ -17,3 +17,5 @@ ln -sT dotfiles/terminfo .terminfo
 
 ln -s dotfiles/shell/zshrc .zshrc
 ln -s dotfiles/shell/aliases .aliases
+
+ln -s dotfiles/tmux.conf .tmux.conf
