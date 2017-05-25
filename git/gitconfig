@@ -1,11 +1,12 @@
 [core]
-	excludesfile = ~/.gitignore_global
-	autocrlf = false
-	safecrlf = false
+    excludesfile = ~/.gitignore_global
+    autocrlf = false
+    safecrlf = false
+    editor = vim
 [user]
-	name = Jack Dai
-	email = jdai88@gmail.com
+    name = Jack Dai
+    email = jdai88@gmail.com
 [alias]
-	st = status
+    st = status
 [push]
     default = simple
