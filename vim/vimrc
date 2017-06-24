@@ -131,7 +131,7 @@ set ttimeoutlen=0  " dont wait on key codes
 
 set scrolloff=3
 set autoindent
-set laststatus=2
+set laststatus=1
 set confirm
 set number
 set relativenumber
