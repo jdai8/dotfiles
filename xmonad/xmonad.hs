@@ -46,18 +46,13 @@ myKeyMappings config@(XConfig {modMask=modm}) = M.fromList $
     , ((0,    xK_Print                ), spawn "snip"                 )
     , ((0,    xF86XK_AudioRaiseVolume ), spawn "amixer set Master 2.5%+")
     , ((0,    xF86XK_AudioLowerVolume ), spawn "amixer set Master 2.5%-")
-    , ((0,    xF86XK_AudioMute        ), spawn "amixer set Master 0%" )
-    , ((modm, xK_a                    ), spawn toggleAudio)
+    , ((0,    xF86XK_AudioMute        ), spawn "amixer set Master toggle" )
 
     , ((modm, xK_c      ), spawn "google-chrome-stable" )
     , ((modm, xK_z      ), spawn "zathura-wrapper.sh"   )
     , ((modm, xK_s      ),
       spawn "kill $(pidof mybar) || mybar -p | dzen2 -ta l -h 50 -fg black -bg black -fn Hack -y 9999")
     ]
-
-toggleAudio = "(amixer get \"Headphone Jack\" | grep \"\\[on\\]\" && " ++
-                "amixer set \"Headphone Jack\" off && amixer set Speaker on) || " ++
-              "(amixer set \"Headphone Jack\" on && amixer set Speaker off)"
 
 myFocusedColor h | h >= 6 && h < 18 = "#657b83" -- #657b83 looks ok
                  | otherwise        = "#d33682"

@@ -11,8 +11,7 @@ import System.IO (hFlush, stdout)
 import Text.Read
 
 data Info = Info
-    { speakerOn      :: Bool
-    , headphoneOn    :: Bool
+    { audioOn        :: Bool
     , wifiOn         :: Bool
     , batteryPercent :: Int
     , charging       :: Bool
@@ -24,11 +23,10 @@ display (info, nMonitors) = intercalate (prettify "" "")
                           $ map snd
                           $ filter (($ info) . fst)
 
-    [ (speakerOn   , prettify "#b58900" "S"       ) -- yellow
-    , (headphoneOn , prettify "#b58900" "H"       ) -- yellow
-    , (not . wifiOn, prettify "#cb4b16" "No Wifi" ) -- orange
+    [ (not.audioOn , prettify "#b58900" "MUTED"       ) -- yellow
+    , (not.wifiOn  , prettify "#cb4b16" "NO WIFI" ) -- orange
     , (percentIf   , percentStr                   ) -- cyan/green/red
-    , (charging    , prettify "#d33682" "Charging") -- magenta
+    , (charging    , prettify "#d33682" "CHARGING") -- magenta
     , (return True , "^pa(" ++ show (rightAlign nMonitors) ++ ")" )
     , (return True , prettify "#6c71c4" dayStr    ) -- light purple
     , (return True , prettify "#268bd2" timeStr   ) -- light blue
@@ -71,8 +69,7 @@ getBatteryCharging =
     (==) "Charging\n" <$> readFile (batteryDir ++ "status")
 
 getInfo :: IO Info
-getInfo = Info <$> getAudioOn "Speaker"
-               <*> getAudioOn "Headphone Jack"
+getInfo = Info <$> getAudioOn "Master"
                <*> getWifi
                <*> getBatteryPercent
                <*> getBatteryCharging
