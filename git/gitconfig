@@ -8,5 +8,6 @@
     email = jdai88@gmail.com
 [alias]
     st = status
+    br = branch
 [push]
     default = simple
