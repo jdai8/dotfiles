@@ -2,7 +2,7 @@ let mapleader = "\<Space>"
 
 " dotvim is ~/.vim on unix, ~/vimfiles on windows or cygwin
 let dotvim = expand("~/.vim")
-if has("win32") || has("win32unix")
+if has("win64") || has("win32") || has("win32unix")
     let dotvim = expand("~/vimfiles")
 endif
 
@@ -10,7 +10,8 @@ endif
 execute pathogen#infect(dotvim . '/plugins/{}', dotvim . '/colorschemes/{}')
 
 syntax enable
-let &bg = (strftime("%H") >= 5 && strftime("%H") < 18) ? "light" : "dark"
+" let &bg = (strftime("%H") >= 5 && strftime("%H") < 18) ? "light" : "dark"
+set bg=light
 color solarized
 
 " search through oldfiles, taken from https://github.com/romainl/vim-tinyMRU/
@@ -57,15 +58,16 @@ filetype plugin indent on
 " don't auto-add a comment when I press o or O
 autocmd FileType * setlocal formatoptions-=o
 
-" may have to adjust this (map ctrl-backspace to delete words)
+" may have to adjust this per terminal (map ctrl-backspace to delete words)
 inoremap  
-inoremap  <nop>
 
 cnoreabbrev H vert h
 
 " Leader mappings
 nnoremap <leader><tab> <C-^>
 nnoremap <leader>e :ls<CR>:b<space>
+
+command! C call system('clip.exe', @+)
 
 for c in ["p", "P", "y", "Y"]
     execute 'nnoremap <leader>' . c . ' "+' . c
@@ -114,7 +116,7 @@ autocmd FileType html       set shiftwidth=2 tabstop=2 softtabstop=2
 autocmd FileType css        set shiftwidth=2 tabstop=2 softtabstop=2
 autocmd FileType elm        set shiftwidth=2 tabstop=2 softtabstop=2
 
-set mouse = ""
+" set mouse = ""
 
 noremap Y y$
 
@@ -147,3 +149,4 @@ set hlsearch
 set autoread
 set showcmd
 set noruler
+set hidden

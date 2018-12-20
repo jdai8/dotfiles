@@ -9,5 +9,8 @@
 [alias]
     st = status
     br = branch
+    line = log -n 10 --oneline
+    difs = diff --staged
+    uncommit = reset --soft HEAD^
 [push]
     default = simple
