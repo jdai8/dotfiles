@@ -1,21 +1,23 @@
 #!/bin/bash
 # Sets up environment and symlinks
 
-cd ~/dotfiles/vim
-mkdir dotvim/backup
-mkdir dotvim/undo
-cp -r pathogen/autoload dotvim/autoload
-cd ~
+# Clone vim plugins into .vim/pack/jack/start
+[ -z "$VIM_PACK_DIR" ] && VIM_PACK_DIR=.vim/pack/jack
+mkdir -p $VIM_PACK_DIR/start
+git -C $VIM_PACK_DIR/start clone git@github.com:wellle/targets.vim.git
+git -C $VIM_PACK_DIR/start clone git@github.com:tpope/vim-commentary.git
+git -C $VIM_PACK_DIR/start clone git@github.com:altercation/vim-colors-solarized.git
 
-ln -s dotfiles/vim/vimrc .vimrc
-ln -s dotfiles/vim/dotvim .vim
+[ ! -e .vimrc ] && ln -s dotfiles/vim/vimrc .vimrc
+mkdir -p .vim/backup
+mkdir -p .vim/undo
 
-ln -s dotfiles/git/gitconfig .gitconfig
-ln -s dotfiles/git/gitignore_global .gitignore_global
+[ ! -e .gitconfig ] && ln -s dotfiles/git/gitconfig .gitconfig
+[ ! -e .gitignore_global ] && ln -s dotfiles/git/gitignore_global .gitignore_global
 
-ln -sT dotfiles/terminfo .terminfo
+[ ! -e .terminfo ] && ln -s dotfiles/terminfo .terminfo
 
-ln -s dotfiles/shell/zshrc .zshrc
-ln -s dotfiles/shell/aliases .aliases
+[ ! -e .zshrc ] && ln -s dotfiles/shell/zshrc .zshrc
+[ ! -e .aliases ] && ln -s dotfiles/shell/aliases .aliases
 
-ln -s dotfiles/tmux.conf .tmux.conf
+[ ! -e .tmux.conf ] && ln -s dotfiles/tmux.conf .tmux.conf

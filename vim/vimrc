@@ -7,7 +7,9 @@ if has("win64") || has("win32") || has("win32unix")
 endif
 
 " plugins and colorschemes
-execute pathogen#infect(dotvim . '/plugins/{}', dotvim . '/colorschemes/{}')
+if isdirectory("/usr/local/opt/fzf")
+    set runtimepath+=/usr/local/opt/fzf
+endif
 
 syntax enable
 " let &bg = (strftime("%H") >= 5 && strftime("%H") < 18) ? "light" : "dark"
