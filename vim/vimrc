@@ -12,7 +12,7 @@ execute pathogen#infect(dotvim . '/plugins/{}', dotvim . '/colorschemes/{}')
 syntax enable
 " let &bg = (strftime("%H") >= 5 && strftime("%H") < 18) ? "light" : "dark"
 set bg=light
-color solarized
+colorscheme solarized
 
 " search through oldfiles, taken from https://github.com/romainl/vim-tinyMRU/
 function! OldfilesComplete(substr, cmdLine, cursor)
@@ -38,6 +38,7 @@ endfunction
 command! -nargs=1 -complete=customlist,OldfilesComplete Old
             \ call OpenOldFile(fnameescape(<f-args>))
 
+nnoremap <leader>m :e $MYVIMRC<CR>
 nnoremap <leader>f :Old<space>
 
 " highlight when over 80 columns
@@ -78,6 +79,9 @@ for d in ["h", "j", "k", "l"]
     execute 'nnoremap <leader>' . d . ' <C-w>' . d
 endfor
 
+nnoremap <backspace> <C-U>
+nnoremap <enter> <C-D>
+
 nnoremap <leader>w :w<CR>
 nnoremap <leader>q :q<CR>
 nnoremap q: :q<CR>
@@ -96,6 +100,8 @@ function! CleanUpWhitespace()
     normal `z
 endfunction
 command! CleanUpWhitespace call CleanUpWhitespace()
+
+command! Cwd cd %:h
 
 " don't make .netrwhist files
 let g:netrw_dirhistmax = 0
@@ -120,7 +126,7 @@ autocmd FileType elm        set shiftwidth=2 tabstop=2 softtabstop=2
 
 noremap Y y$
 
-nnoremap <silent> <CR> :noh<CR>
+nnoremap <silent> <c-l> :noh<CR>
 
 augroup CursorLine
     au!
@@ -133,7 +139,7 @@ set ttimeoutlen=0  " dont wait on key codes
 
 set scrolloff=3
 set autoindent
-set laststatus=1
+set laststatus=2
 set confirm
 set number
 set relativenumber
@@ -142,7 +148,7 @@ set wildmode=longest,full
 set wildignorecase
 set ignorecase
 set smartcase
-set visualbell
+set novisualbell
 set backspace=indent,eol,start
 set incsearch
 set hlsearch

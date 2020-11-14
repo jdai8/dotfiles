@@ -3,14 +3,45 @@
     autocrlf = false
     safecrlf = false
     editor = vim
+    precomposeunicode = true
+[rerere]
+    enabled = true
 [user]
     name = Jack Dai
     email = jdai88@gmail.com
 [alias]
+    s = status -uno
     st = status
-    br = branch
     line = log -n 10 --oneline
+    d = diff
     difs = diff --staged
     uncommit = reset --soft HEAD^
+    difs = diff --staged
+    uncommit = reset --soft HEAD^
+    co = checkout
+    mb = merge-base HEAD master
+    dm = "!git diff $(git merge-base --fork-point origin/master)"
+    c = commit
+    cv = commit -v
+    cav = commit -av
+    cam = commit -am
+    wip = commit -am "wip"
+    fancybranch = for-each-ref --sort=-committerdate refs/heads/ --color always --format='%(HEAD)%(color:yellow)%(refname:short)%(color:reset)|%(color:red)%(objectname:short)%(color:reset)|%(color:green)%(committerdate:relative)%(color:reset)|%(authorname): %(contents:subject)'
+    brlog = "!git fancybranch | column -t -s'|'"
+    blog = "!git fancybranch --count 10 | column -t -s'|'"
+    b = "!git fancybranch --count 10 | column -t -s'|'"
+    br = branch
+    prom = pull --rebase origin master
+    punch = push --force-with-lease
+    refresh = "!git pull --rebase origin master && git push --force-with-lease"
+    cp = cherry-pick
+    new-branch = "!f() { git checkout -b $1 origin/master; }; f"
+    tip = rev-parse HEAD
+    pr = "!pull-request"
+    update-branch = "!f() { [ $# -eq 2 ] && git update-ref refs/heads/$1 $2; }; f"
+    mylog = log --author \"Jack Dai\"
+    rest = restore
 [push]
-    default = simple
+    default = current
+[pull]
+    ff = only

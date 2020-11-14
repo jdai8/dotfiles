@@ -1,10 +1,24 @@
-alias v='vim'
-alias z='zathura-wrapper.sh'
-alias ls='ls --color=auto'
-alias l='ls --color=auto'
-alias ll='ls -la --color=auto --human-readable'
-alias grep='grep -i'
-alias cal='cal -n 3'
-alias du='du -h'
-alias df='df -h'
-alias a='source activate.sh'
+alias v=vim
+alias ls=ls
+alias l=ls
+alias ll="ls -la"
+alias c=cd
+alias e=$EDITOR
+
+function gw {
+    $(git rev-parse --show-toplevel)/gradlew $*
+}
+
+function backup {
+    cp "$1" "$1.backup"
+}
+
+alias g=git
+
+function pull-request {
+    BRANCH=$(git branch --show-current)
+    URL=$(git config --get remote.origin.url | sed "s/^git@\(.*\):\(.*\)\.git/https:\/\/\1\/\2\/pull\/$BRANCH/")
+    open $URL
+}
+
+alias pr=pull-request
