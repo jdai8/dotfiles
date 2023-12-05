@@ -1,7 +1,7 @@
 alias v=vim
 alias ls=ls
 alias l=ls
-alias ll="ls -la"
+alias ll="ls -lah"
 alias c=cd
 alias e=$EDITOR
 
