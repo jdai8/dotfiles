@@ -4,6 +4,7 @@
     safecrlf = false
     editor = vim
     precomposeunicode = true
+    commentchar = %
 [rerere]
     enabled = true
 [user]
@@ -12,10 +13,9 @@
 [alias]
     s = status -uno
     st = status
+    l = log -n 10 --oneline
     line = log -n 10 --oneline
     d = diff
-    difs = diff --staged
-    uncommit = reset --soft HEAD^
     difs = diff --staged
     uncommit = reset --soft HEAD^
     co = checkout
@@ -26,12 +26,15 @@
     cav = commit -av
     cam = commit -am
     wip = commit -am "wip"
+    fixup = commit -am "fixup"
+    amend = commit --all --amend --no-edit
     fancybranch = for-each-ref --sort=-committerdate refs/heads/ --color always --format='%(HEAD)%(color:yellow)%(refname:short)%(color:reset)|%(color:red)%(objectname:short)%(color:reset)|%(color:green)%(committerdate:relative)%(color:reset)|%(authorname): %(contents:subject)'
     brlog = "!git fancybranch | column -t -s'|'"
     blog = "!git fancybranch --count 10 | column -t -s'|'"
     b = "!git fancybranch --count 10 | column -t -s'|'"
     br = branch
     prom = pull --rebase origin master
+    promi = pull --rebase=interactive origin master
     punch = push --force-with-lease
     refresh = "!git pull --rebase origin master && git push --force-with-lease"
     cp = cherry-pick
@@ -41,7 +44,13 @@
     update-branch = "!f() { [ $# -eq 2 ] && git update-ref refs/heads/$1 $2; }; f"
     mylog = log --author \"Jack Dai\"
     rest = restore
+    rb = rebase
+    rbc = rebase --continue
 [push]
     default = current
 [pull]
     ff = only
+[rebase]
+	autosquash = true
+[init]
+	defaultBranch = main
