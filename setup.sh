@@ -35,3 +35,6 @@ install_file shell/zshrc .zshrc
 install_file shell/aliases .aliases
 
 install_file tmux.conf .tmux.conf
+
+mkdir -p .config/ghostty
+install_file ghostty/config.ghostty .config/ghostty/config.ghostty
