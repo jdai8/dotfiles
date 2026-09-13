@@ -1,0 +1,4 @@
+font-feature = "-calt,-liga,-dlig"
+
+keybind = cmd+j=goto_split:next
+keybind = cmd+k=goto_split:previous
